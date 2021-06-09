@@ -26,21 +26,29 @@ public class MainActivity extends AppCompatActivity {
     Button b4 ;
     public void set_random(){
         Random rand = new Random();
-        x = rand.nextInt(101);
-        y = rand.nextInt(101);
         location_of_crt_ans = rand.nextInt(4);
         operation=rand.nextInt(4);
         String operation_symbol="";
         switch (operation){
-            case 0:{ answer=x+y; operation_symbol=" + ";break;}
-            case 1:{answer=x-y; operation_symbol=" - ";break;}
-            case 2:{answer=x*y; operation_symbol=" * ";break;}
-            case 3:{answer=x/y; operation_symbol=" / ";break;}
+            case 0:{ operation_symbol=" + ";x = rand.nextInt(101);
+                y = rand.nextInt(101);answer=x+y; break;}//max 200
+            case 1:{operation_symbol=" - ";x = rand.nextInt(100);
+                y = x+rand.nextInt(100);answer=x-y; break;}//max 100
+            case 2:{operation_symbol=" * ";x = rand.nextInt(20);
+                y = rand.nextInt(20);answer=x*y; break;}//400
+            case 3:{operation_symbol=" / ";x = rand.nextInt(100);
+                y = rand.nextInt(20);answer=x/y; break;}//max /100
         }
         question.setText(Integer.toString(x) + operation_symbol + Integer.toString(y));
         for (int i = 0; i < 4; i++) {
             if (i != location_of_crt_ans) {
-                int k = rand.nextInt(201);
+                int k=0 ;
+                switch (operation){
+                    case 0:{ k=rand.nextInt(201); break;}//max 200
+                    case 1:{k=rand.nextInt(101) ;break;}//max 100
+                    case 2:{k=rand.nextInt(401) ;break;}//400
+                    case 3:{k=rand.nextInt(101) ;break;}//max 100
+                }
                 while (k == answer) {
                     k = rand.nextInt(201);
                 }
