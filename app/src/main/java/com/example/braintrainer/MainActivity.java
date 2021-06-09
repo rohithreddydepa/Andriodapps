@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     TextView decision;
     TextView timer;
     Button startButton;
+    int operation,answer;
     static int totalcount,crtcount,lives;
     int x,y;
     int randomNumbers[];
@@ -28,16 +29,24 @@ public class MainActivity extends AppCompatActivity {
         x = rand.nextInt(101);
         y = rand.nextInt(101);
         location_of_crt_ans = rand.nextInt(4);
-        question.setText(Integer.toString(x) + " + " + Integer.toString(y));
+        operation=rand.nextInt(4);
+        String operation_symbol="";
+        switch (operation){
+            case 0:{ answer=x+y; operation_symbol=" + ";break;}
+            case 1:{answer=x-y; operation_symbol=" - ";break;}
+            case 2:{answer=x*y; operation_symbol=" * ";break;}
+            case 3:{answer=x/y; operation_symbol=" / ";break;}
+        }
+        question.setText(Integer.toString(x) + operation_symbol + Integer.toString(y));
         for (int i = 0; i < 4; i++) {
             if (i != location_of_crt_ans) {
                 int k = rand.nextInt(201);
-                while (k == x + y) {
+                while (k == answer) {
                     k = rand.nextInt(201);
                 }
                 randomNumbers[i] = k;
             } else {
-                randomNumbers[i] = x + y;
+                randomNumbers[i] = answer;
             }
 
         }
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         set_random();
     }
     public void checkAnswer(View view){
-            if (x + y == randomNumbers[Integer.parseInt(view.getTag().toString())]) {
+            if (answer == randomNumbers[Integer.parseInt(view.getTag().toString())]) {
                 decision.setText("Correct");
                 crtcount++;
             } else {
@@ -108,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             timer=(TextView)findViewById(R.id.timeTextView);
             startButton=(Button)findViewById(R.id.Start);
             randomNumbers = new int[4];
+            operation=0;
         b1 = (Button) findViewById(R.id.button1);
         b2 = (Button) findViewById(R.id.button2);
         b3 = (Button) findViewById(R.id.button3);
