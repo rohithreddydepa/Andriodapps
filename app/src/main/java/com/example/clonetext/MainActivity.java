@@ -26,17 +26,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public void copy(View view){
         String str=data.getText().toString();
-        StringBuffer tmp;
+        StringBuffer tmp = new StringBuffer();
         try {
             if (aSwitch.isChecked()) {
-                tmp = new StringBuffer();
                 for (int i = 0; i < Integer.parseInt(number.getText().toString()); i++) {
                     tmp.append(Integer.toString(i + 1) + ". ");
                     tmp.append(str);
                     tmp.append(System.getProperty("line.separator"));
                 }
             } else {
-                tmp = new StringBuffer(data.getText().toString());
                 for (int i = 0; i < Integer.parseInt(number.getText().toString()); i++) {
                     tmp.append(str + " ");
                 }
